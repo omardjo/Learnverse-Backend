@@ -22,6 +22,12 @@ def get_topic(request, topic_id):
     serializer = TopicSerializer(topic)
     return Response(serializer.data)
 
+@api_view(['GET'])
+def get_all_topics(request):
+    topics = Topic.objects.all()
+    serializer = TopicSerializer(topics, many=True)
+    return Response(serializer.data)
+
 @api_view(['DELETE'])
 def delete_topic(request, topic_id):
     try:
